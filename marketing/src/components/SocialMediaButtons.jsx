@@ -96,7 +96,7 @@ const StyledWrapper = styled.div`
   }
 
   .button__icon {
-    color: inherit;
+    color: white;
     transition: transform 0.3s ease-in-out;
   }
 

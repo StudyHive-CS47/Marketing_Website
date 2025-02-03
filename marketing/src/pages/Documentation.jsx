@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { FaFilePdf, FaGithub, FaBook, FaFileAlt, FaArrowLeft } from 'react-icons/fa';
-import Hero from '../components/Hero';
+import BackgroundPattern from '../components/ui/BackgroundPattern';
 
 const Documentation = () => {
   const navigate = useNavigate();
@@ -13,29 +13,23 @@ const Documentation = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-black">
-      {/* Hero Section with new background */}
-      <Hero
-        title="Documentation"
-        subtitle="Access our project documentation and resources"
-      />
-      
-      {/* Content Container */}
-      <div className="relative z-10 w-full">
-        <StyledWrapper>
-          {/* Back Button */}
-          <motion.button
-            className="back-button"
-            onClick={handleBackToLearnMore}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <FaArrowLeft className="arrow-icon" />
-            <span>Back to Learn More</span>
-          </motion.button>
+    <div className="relative min-h-screen w-full">
+      <BackgroundPattern />
+      <StyledWrapper>
+        {/* Back Button */}
+        <motion.button
+          className="back-button"
+          onClick={handleBackToLearnMore}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <FaArrowLeft className="arrow-icon" />
+          <span>Back to Learn More</span>
+        </motion.button>
 
-          {/* Documentation Links Section */}
+        {/* Documentation Links Section */}
+        <div className="relative z-10 w-full">
           <section className="section">
             <div className="max-w-4xl mx-auto px-4">
               <motion.div
@@ -123,8 +117,8 @@ const Documentation = () => {
               </div>
             </div>
           </section>
-        </StyledWrapper>
-      </div>
+        </div>
+      </StyledWrapper>
     </div>
   );
 };
@@ -134,22 +128,31 @@ const StyledWrapper = styled.div`
   color: white;
 
   .back-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    padding: 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 9999px;
-    color: white;
+    background: transparent;
+    border: none;
+    color: #fff;
     font-size: 1rem;
+    cursor: pointer;
     transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 1.8rem;
+    border-radius: 50px;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateX(-5px);
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     .arrow-icon {

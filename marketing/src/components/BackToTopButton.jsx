@@ -31,8 +31,13 @@ const BackToTopButton = () => {
 
   return isVisible ? (
     <StyledWrapper $isVisible={isVisible}>
-      <button type="button" className="button" onClick={scrollToTop}>
-        <svg className="svgIcon" viewBox="0 0 384 512">
+      <button className="button" onClick={scrollToTop}>
+        <svg
+          className="svgIcon"
+          viewBox="0 0 384 512"
+          height="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
         </svg>
       </button>
@@ -52,13 +57,12 @@ const StyledWrapper = styled.div`
     width: clamp(40px, 12vw, 50px);
     height: clamp(40px, 12vw, 50px);
     border-radius: 50%;
-    background: linear-gradient(315deg, #FF416C, #FF4B2B);
-    border: none;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 0px 15px rgba(255, 65, 108, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
     overflow: hidden;
@@ -68,46 +72,31 @@ const StyledWrapper = styled.div`
   .svgIcon {
     width: clamp(10px, 3vw, 12px);
     transition: transform 0.3s ease;
-  }
-
-  .svgIcon path {
-    fill: white;
+    fill: #000;
   }
 
   @media (min-width: 768px) {
     .button:hover {
-      width: 140px;
-      border-radius: 50px;
-      background: linear-gradient(315deg, #FF4B2B, #FF416C);
-      align-items: center;
-      box-shadow: 0px 0px 20px rgba(255, 65, 108, 0.5);
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
     }
 
     .button:hover .svgIcon {
-      transform: translateY(-200%);
-    }
-
-    .button:hover::before {
-      font-size: 13px;
-      opacity: 1;
-      bottom: unset;
+      transform: translateY(-2px);
     }
   }
 
-  .button::before {
-    position: absolute;
-    bottom: -20px;
-    content: "Back to Top";
-    color: white;
-    font-size: 0px;
-    transition: all 0.3s ease;
+  .button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
   }
 
   /* Active state for mobile touch */
   @media (max-width: 767px) {
     .button:active {
       transform: scale(0.95);
-      background: linear-gradient(315deg, #FF4B2B, #FF416C);
+      background: #fff;
     }
   }
 `;

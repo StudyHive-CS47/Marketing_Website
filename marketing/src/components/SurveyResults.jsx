@@ -67,15 +67,15 @@ const SurveyResults = () => {
             {
               label: 'Before StudyHive',
               data: [70, 30, 80, 40],
-              backgroundColor: 'rgba(239, 68, 68, 0.7)', // red
-              borderColor: 'rgba(239, 68, 68, 1)',
+              backgroundColor: 'rgba(156, 163, 175, 0.7)', // grey
+              borderColor: 'rgba(156, 163, 175, 0.9)',
               borderWidth: 1
             },
             {
               label: 'With StudyHive',
               data: [100, 80, 100, 90],
-              backgroundColor: 'rgba(59, 130, 246, 0.7)', // blue
-              borderColor: 'rgba(59, 130, 246, 1)',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)', // white
+              borderColor: 'rgba(255, 255, 255, 0.9)',
               borderWidth: 1
             }
           ]
@@ -146,19 +146,19 @@ const SurveyResults = () => {
   const legendItems = [
     {
       label: 'Productivity: 30% increase in efficiency',
-      color: 'rgba(59, 130, 246, 0.7)'
+      color: 'rgba(255, 255, 255, 0.8)'
     },
     {
       label: 'Deadline Management: 50% reduction in missed deadlines',
-      color: 'rgba(59, 130, 246, 0.7)'
+      color: 'rgba(255, 255, 255, 0.8)'
     },
     {
       label: 'Academic Performance: 20% improvement',
-      color: 'rgba(59, 130, 246, 0.7)'
+      color: 'rgba(255, 255, 255, 0.8)'
     },
     {
       label: 'Feature Usage: 65% keyword search, 50% group chat, 60% note sharing',
-      color: 'rgba(59, 130, 246, 0.7)'
+      color: 'rgba(255, 255, 255, 0.8)'
     }
   ];
 

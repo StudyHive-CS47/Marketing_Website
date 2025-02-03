@@ -21,8 +21,8 @@ body {
   margin: 0;
   min-width: 100%;
   min-height: 100vh;
-  /* Remove display: flex and place-items: center */
   display: block;
+  background-color: #1e1e1e; /* This matches the previous Pattern background color */
 }
 
 #root {

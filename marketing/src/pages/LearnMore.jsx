@@ -1,20 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import Hero from '../components/Hero';
+import { useNavigate } from 'react-router-dom';
 import { 
   FaReact, 
-  FaJava, 
-  FaDatabase, 
-  FaRobot, 
-  FaUsers, 
-  FaClock, 
-  FaFire, 
+  FaUsers,
+  FaRobot,
+  FaClock,
   FaPython,
-  FaCode
+  FaDatabase,
+  FaCode,
+  FaFire,
+  FaArrowLeft
 } from 'react-icons/fa';
-import { SiTailwindcss, SiHuggingface, SiSpring } from 'react-icons/si';
-import { useNavigate } from 'react-router-dom';
+import { 
+  SiSpring, 
+  SiTailwindcss, 
+  SiHuggingface 
+} from 'react-icons/si';
+import BackgroundPattern from '../components/ui/BackgroundPattern';
+import DocsButton from '../components/ui/DocsButton';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -26,7 +31,7 @@ const StyledWrapper = styled.div`
   }
 
   .glass-container {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
@@ -158,6 +163,17 @@ const StyledWrapper = styled.div`
   }
 
   .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
     position: fixed;
     top: 2rem;
     left: 2rem;
@@ -167,48 +183,15 @@ const StyledWrapper = styled.div`
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 1rem 1.8rem;
     border-radius: 50px;
-    color: white;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    cursor: pointer;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #FF416C, #FF4B2B);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
-      border-radius: 50px;
-    }
 
     &:hover {
+      background: rgba(255, 255, 255, 0.1);
       transform: translateY(-2px);
       border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-
-      &::before {
-        opacity: 1;
-      }
-
-      .arrow {
-        transform: translateX(-4px);
-      }
     }
 
-    .arrow {
-      transition: transform 0.3s ease;
-      font-size: 1.4rem;
+    .arrow-icon {
+      font-size: 1.2rem;
     }
   }
 
@@ -554,33 +537,52 @@ const LearnMore = () => {
     navigate('/');
   };
 
-  const openProjectProposal = () => {
-    window.open('/Group.pdf', '_blank');
+  const handleDocsClick = () => {
+    navigate('/documentation');
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-black">
-      {/* Hero Section with new background */}
-      <Hero
-        title="Learn More"
-        subtitle="Discover how StudyHive is revolutionizing student collaboration"
-      />
-      
-      {/* Content Container */}
-      <div className="relative z-10 w-full">
-        <StyledWrapper>
-          {/* Back Button - Moved inside StyledWrapper */}
-          <motion.button
-            className="back-button"
-            onClick={handleBackToHome}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+    <div className="relative min-h-screen w-full">
+      <BackgroundPattern />
+      <StyledWrapper>
+        {/* Header Section */}
+        <section className="relative z-10 py-16 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-6xl mx-auto px-4 text-center"
           >
-            <span className="arrow">←</span>
-            <span>Back to Home</span>
-          </motion.button>
+            {/* Back to Home Button */}
+            <motion.button
+              className="back-button"
+              onClick={handleBackToHome}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <FaArrowLeft className="arrow-icon" />
+              <span>Back to Home</span>
+            </motion.button>
 
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 mb-6">
+              Learn More
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+              Discover how StudyHive is revolutionizing student collaboration
+            </p>
+
+            {/* Documentation Button */}
+            <StyledButtonWrapper>
+              <button onClick={handleDocsClick}>
+                Important documents and links
+              </button>
+            </StyledButtonWrapper>
+          </motion.div>
+        </section>
+
+        {/* Content Container */}
+        <div className="relative z-10 w-full">
           {/* Project Overview */}
           <section className="section">
             <div className="max-w-6xl mx-auto px-4">
@@ -763,10 +765,56 @@ const LearnMore = () => {
               </motion.div>
             </div>
           </section>
-        </StyledWrapper>
-      </div>
+        </div>
+      </StyledWrapper>
     </div>
   );
 };
+
+// Replace the old DocsButtonWrapper with this new style
+const StyledButtonWrapper = styled.div`
+  button {
+    appearance: none;
+    background-color: transparent;
+    border: 0.125em solid #fff; // Changed to white to match theme
+    border-radius: 0.9375em;
+    box-sizing: border-box;
+    color: #fff; // Changed to white to match theme
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 3.75em;
+    min-width: 0;
+    outline: none;
+    padding: 1em 2.3em;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+  }
+
+  button:disabled {
+    pointer-events: none;
+  }
+
+  button:hover {
+    color: #000; // Changed to black for contrast
+    background-color: #fff; // Changed to white to match theme
+    box-shadow: rgba(255, 255, 255, 0.25) 0 8px 15px; // Changed to white shadow
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+`;
 
 export default LearnMore; 
