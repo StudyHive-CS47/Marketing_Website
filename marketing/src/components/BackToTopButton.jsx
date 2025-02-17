@@ -13,7 +13,14 @@ const BackToTopButton = () => {
     }
   };
 
-  // Set the scroll event listener
+  // Set the top scroll offset
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', toggleVisibility);
     return () => {
@@ -21,83 +28,87 @@ const BackToTopButton = () => {
     };
   }, []);
 
-  // Scroll to top handler
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  if (!isVisible) {
+    return null;
+  }
 
-  return isVisible ? (
-    <StyledWrapper $isVisible={isVisible}>
+  return (
+    <StyledWrapper>
       <button className="button" onClick={scrollToTop}>
-        <svg
-          className="svgIcon"
-          viewBox="0 0 384 512"
-          height="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg className="svgIcon" viewBox="0 0 384 512">
           <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
         </svg>
       </button>
     </StyledWrapper>
-  ) : null;
-};
+  );
+}
 
 const StyledWrapper = styled.div`
   position: fixed;
-  bottom: clamp(20px, 5vw, 40px);
-  right: clamp(20px, 5vw, 40px);
-  z-index: 1000;
-  opacity: ${props => props.$isVisible ? 1 : 0};
-  transition: opacity 0.3s ease-in-out;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 90;
+
+  @media (max-width: 768px) {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
 
   .button {
-    width: clamp(40px, 12vw, 50px);
-    height: clamp(40px, 12vw, 50px);
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    background-color: rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(8px);
+    border: 1px solid transparent;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 0px 0px 4px rgba(30, 120, 250, 0.2);
     cursor: pointer;
     transition: all 0.3s ease;
     overflow: hidden;
     position: relative;
+
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .svgIcon {
-    width: clamp(10px, 3vw, 12px);
-    transition: transform 0.3s ease;
-    fill: #000;
+    width: 12px;
+    transition: all 0.3s ease;
   }
 
-  @media (min-width: 768px) {
-    .button:hover {
-      background: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
-    }
-
-    .button:hover .svgIcon {
-      transform: translateY(-2px);
-    }
+  .svgIcon path {
+    fill: #ffffff;
   }
 
-  .button:active {
-    transform: scale(0.95);
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+  .button:hover {
+    width: 140px;
+    border-radius: 50px;
+    background-color: rgba(59, 130, 246, 0.8);
+    box-shadow: 0px 0px 10px rgba(59, 130, 246, 0.5);
   }
 
-  /* Active state for mobile touch */
-  @media (max-width: 767px) {
-    .button:active {
-      transform: scale(0.95);
-      background: #fff;
-    }
+  .button:hover .svgIcon {
+    transform: translateY(-200%);
+  }
+
+  .button::before {
+    position: absolute;
+    bottom: -20px;
+    content: "Back to Top";
+    color: white;
+    font-size: 0px;
+  }
+
+  .button:hover::before {
+    font-size: 13px;
+    opacity: 1;
+    bottom: unset;
   }
 `;
 

@@ -2,54 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Reset default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body, #root {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
 body {
-  margin: 0;
-  min-width: 100%;
-  min-height: 100vh;
-  display: block;
-  background-color: #1e1e1e; /* This matches the previous Pattern background color */
+  @apply bg-studyhive-dark text-white;
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
+html {
+  scroll-behavior: smooth;
 }
 
-/* Keep other styles but remove conflicting ones */
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Remove or modify any button styles that might conflict with your custom styles */
-button:focus,
-button:focus-visible {
-  outline: none;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-}
+/* Remove all the default styles that might be conflicting */
